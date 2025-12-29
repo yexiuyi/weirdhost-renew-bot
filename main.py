@@ -3,7 +3,7 @@
 """
 weirdhost-auto - main.py
 改动：优先使用 cookie 登录（REMEMBER_WEB_COOKIE），cookie 失效再使用邮箱+密码登录。
-保留：Telegram 通知、异常截图上传、超时延长、按索引填写输入框、勾选 checkbox、点击韩文 로그인 登录按钮、点击 시간 추가 续期。
+保留：Telegram 通知、异常截图上传、超时延长、按索引填写输入框、勾选 checkbox、点击韩文 로그인 登录按钮、点击 시간추가 续期。
 新增：续期后查询到期时间（基于页面文本匹配 "유통기한"），并在通知中包含到期时间。
 环境变量：
   - REMEMBER_WEB_COOKIE (可选) : cookie 的 value
@@ -269,10 +269,10 @@ async def add_server_time():
                 await tg_notify(f"❌ 打开服务器页面失败: {e}")
                 return
 
-            # 查找并点击 '시간 추가' 按钮
-            add_button = page.locator('button:has-text("시간 추가")')
+            # 查找并点击 '시간추가' 按钮
+            add_button = page.locator('button:has-text("시간추가")')
             if await add_button.count() == 0:
-                add_button = page.locator('text=시간 추가')
+                add_button = page.locator('text=시간추가')
             if await add_button.count() == 0:
                 add_button = page.locator('button:has-text("Add Time")')
 
@@ -280,10 +280,10 @@ async def add_server_time():
                 screenshot_path = "no_button_found.png"
                 try:
                     await page.screenshot(path=screenshot_path, full_page=True)
-                    await tg_notify_photo(screenshot_path, caption="❠ 未找到 '시간 추가' 按钮")
+                    await tg_notify_photo(screenshot_path, caption="❠ 未找到 '시간추가' 按钮")
                 except Exception:
                     pass
-                await tg_notify("❌ 未找到 '시간 추가' 按钮，续期失败")
+                await tg_notify("❌ 未找到 '시간추가' 按钮，续期失败")
                 return
 
             # 点击
